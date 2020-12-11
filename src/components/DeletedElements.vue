@@ -9,7 +9,12 @@
 <script>
   export default {
     name: 'DeletedElements',
-    props: ['buttons'],
+    props: {
+      buttons: {
+        type: Array,
+        required: true
+      }
+    },
     data(){
       return {
         status: null
@@ -25,7 +30,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .deleted-button-pannel, .wrapper {
     display: flex;
     flex-direction: row;

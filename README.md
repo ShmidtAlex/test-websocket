@@ -47,3 +47,45 @@ vue-router
 6. ClearSearchButton.vue - wrong, SearchButtonClear.vue - correct
 
 7. props inside child component should be CamelCase, in parent html structure - in kebab-case (applicable only for props)
+
+8. Best practices for Vuex
+
+9. Elements with several arguments should be on new line each
+
+10. make minimum computed properties inside html elements, instead, compute in computed properties inside component and put the result to html
+
+11. options sequence inside component: 
+	
+	Local state:
+	- data
+	- computed
+
+	Reactive events callbacks:
+	- watch
+
+	Life cycle events
+	- beforeCreate
+	- created
+	- beforeMout
+	- mounted
+	- beforeUpdate
+	- updated
+	- activated
+	- deactivated
+	- beforeDestroy
+	- destroyed
+
+	Non-reactive properties:
+	- methods
+
+12. Attributes sequence:
+	
+	is, v-for, if/v-else-if/v-else/v-show/v-cloak, v-pre/v-once, id, ref/key, v-model, other, v-on, v-html/v-text
+
+14. empty string between options when code does't fit on display
+
+15. don't use scoped-option with teg-selectors (body, buttons, table, form, e.t.c.)
+
+16. make interesting styles according to data visualisation
+
+

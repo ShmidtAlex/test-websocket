@@ -62,7 +62,7 @@
     }
   }
 </script>
-<style scoped lang="scss">
+<style lang="scss">
   .main {
     display: flex;
     flex-direction: column;

@@ -1,7 +1,25 @@
 <template>
-  <vue-resizable @resize:end="handleResize" @drag:end="handlePosition" :top="computedTop" :left="computedLeft" v-show="windowVisible" :width="computedWidth" :height="computedHeight" :min-height="initialSize.height" :min-width="initialSize.width" resizable drag-selector=".title" >
-    <div class="block" :id="blockId"
-      :style="{ border: `2px solid ${this.computedBorderColor}`, backgroundColor: computedBorderColor, zIndex: blockId }">
+  <vue-resizable 
+    v-show="windowVisible"
+    @resize:end="handleResize" 
+    @drag:end="handlePosition" 
+    :top="computedTop" 
+    :left="computedLeft"     
+    :width="computedWidth" 
+    :height="computedHeight" 
+    :min-height="initialSize.height" 
+    :min-width="initialSize.width" 
+    resizable 
+    drag-selector=".title" 
+  >
+    <div class="block" 
+      :id="blockId"
+      :style="{ 
+        border: `2px solid ${this.computedBorderColor}`, 
+        backgroundColor: computedBorderColor, 
+        zIndex: blockId 
+      }"
+    >
       <div class="title">some block # {{ blockId }}</div>
       <div class="text">top:{{computedTop}}
       </div>
@@ -18,9 +36,33 @@
 <script>
   import VueResizable from 'vue-resizable'
   export default {
+
     name: 'BlockUnit',
     components: { VueResizable },
-    props: ['blockId', 'computedUnit', 'totally'],
+
+    props: {
+      blockId: {
+        type: Number,
+        required: true
+      },
+
+      computedUnit: {
+        type: Object,
+        required: true,
+        validator: (value) => {
+          return Object.entries(value).every(elem => typeof elem[1] === 'number')
+        }
+      },
+
+      totally: {
+        type: Array,
+        required: true,
+        validator: (value) => {
+          return value.every(unit => typeof unit === 'object')
+        }
+      }
+    },
+
     data(){
       return {
         colors: ['red', 'green', 'blue', 'white', 'purple'],
@@ -32,6 +74,7 @@
         zIndex: 1    
       }
     }, 
+
     methods: {
       handleResize(obj){
         this.localCoordsObj = Object.assign(this.localCoordsObj, obj);
@@ -45,6 +88,7 @@
         this.changeZIndex();
         this.$emit('positionChanged', this.localCoordsObj); 
       },
+
       changeZIndex() {
         let elems = document.querySelectorAll('.resizable-component');
         let runningElemsCoords = [];
@@ -88,6 +132,7 @@
             this.reCountZIndexes(higherElem, shouldBeLowerBlock[0]);
         }
       },
+
       reCountZIndexes(higher, lower) {
         if(higher && lower) {
           let elems = document.querySelectorAll('.resizable-component');
@@ -96,29 +141,37 @@
           lower.style.zIndex = 4;
         }
       },
+
       isEqualToClickedBlock(arrLikeElem){
         return this.removeUnitsOfMeasure(arrLikeElem.style.left) === Math.trunc(this.localCoordsObj.left) && this.removeUnitsOfMeasure(arrLikeElem.style.top) === Math.trunc(this.localCoordsObj.top);
       },
+
       removeUnitsOfMeasure(unit){
         return +unit.match(/\d*/);
       },
+
       emitRemoveBlock() {
         this.$emit('removeBlock', this.blockId);
       }
-    },    
+    },  
+
     computed: {
       computedBorderColor() {
         return this.colors[this.blockId];
       },
+
       computedTop() {
         return this.computedUnit.top;
       },
+
       computedLeft() {
         return this.computedUnit.left;
       },
+
       computedHeight() {
         return this.computedUnit.height;
       },
+      
       computedWidth() {
         return this.computedUnit.width;
       },
