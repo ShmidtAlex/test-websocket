@@ -88,4 +88,12 @@ vue-router
 
 16. make interesting styles according to data visualisation
 
+17. buttons for block manipulating should appear after removing and adding in correct order
+
+18. pressed button for block manipulating should accept color of the moving block
+
+19. make several sections that demonstrate different data visualization approaches
+
+20. grid mast have vertical and horizontal coordinates (V), which will illuminates when block achives the line
+
 

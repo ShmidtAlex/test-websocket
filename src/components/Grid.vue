@@ -1,5 +1,15 @@
 <template>
   <div class="grid">
+    <div class="horizontal-grid-lines">
+      <div class="line" v-for="(line, index1) in computedGridHeight" :key="index1">
+        <span class="left-scale">{{ (computedGridHeight - index1) * 10 }}</span>
+      </div>
+    </div>
+    <div class="vertical-grid-lines">
+      <div class="line" v-for="(line, index2) in computedGridWidth" :key="index2">
+        <span class="bottom-scale">{{ index2 * 10 }}</span>
+      </div>
+    </div>
     <div class="unit" v-for="unit in computedUnits" :key="unit.id">
       <BlockUnit @sizeChanged="updateSize" @positionChanged="updatePosition" @removeBlock="updateRemoved" :blockId="unit.id" :totally="computedUnits" :computedUnit="unit"/>       
     </div>
@@ -42,7 +52,8 @@ export default {
       windowWidth: 0,
       windowHeight: 0,
       gridWidth: 0,
-      lastChangedElemId: null
+      lastChangedElemId: null,
+      gridHeight: 5
     }
   },
   created(){
@@ -62,6 +73,10 @@ export default {
       this.getWindowWidth()
       this.getWindowHeight()
     })
+    const gridElem = document.querySelector('.grid');
+    this.gridHeight = (+window.getComputedStyle(gridElem).height.match(/\d*/))*0.7/10
+    this.gridWidth = + Math.round(window.getComputedStyle(gridElem).width.match(/\d*/)*0.9/10)
+    // 
   },
   methods: {
     moveUp(id){
@@ -127,6 +142,12 @@ export default {
     computedUnits() {
       return this.$store.getters.computedUnits;
     },
+    computedGridHeight() {
+      return this.gridHeight;
+    },
+    computedGridWidth() {
+      return this.gridWidth;
+    }
   },
   watch: {    
     windowWidth(val){
@@ -143,6 +164,58 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+  .horizontal-grid-lines {
+    position: absolute;
+    width: 100%;
+    height: 77.5%;
+    background-color: lightblue;
+    .line {
+      border-bottom: 1px dotted black;
+      height: 10px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      color: black;
+      .left-scale {
+        position: absolute;
+        left: -8px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 5px;
+        font-size: 6px;
+        font-weight: 500;
+      }
+    }
+  }
+  .vertical-grid-lines {
+    position: absolute;
+    width: 100%;
+    height: 77.5%;
+    display: flex;
+    flex-direction: row;
+    .line[data-v-2de7b714] {
+      border-left: 1px dotted black;
+      height: 100%;
+      width: 10px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      .bottom-scale {
+        position: absolute;
+        bottom: -10px;
+        font-size: 6px;
+        width: 10px;
+        font-weight: 500;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+    
+  }
+  
   .grid {
     display: block;
     position: relative;
@@ -152,17 +225,17 @@ export default {
     background-color: lightgray;
   }
   .button-block {
-      position: absolute;
-      bottom: 0;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-      width: 100%;
-      max-width: 1200px;
-      height: 180px;
-      border-top: 1px solid gray;
-    }
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    height: 180px;
+    border-top: 1px solid gray;
+  }
   .positionButton {
     display: flex;
     flex-direction: column;
