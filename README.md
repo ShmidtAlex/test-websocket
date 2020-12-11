@@ -46,4 +46,4 @@ vue-router
 
 6. ClearSearchButton.vue - wrong, SearchButtonClear.vue - correct
 
-7. props inside child component should be CamelCase, in parent html structure - in kebab-case
+7. props inside child component should be CamelCase, in parent html structure - in kebab-case (applicable only for props)
