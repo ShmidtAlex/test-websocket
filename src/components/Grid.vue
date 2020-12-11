@@ -1,7 +1,7 @@
 <template>
   <div class="grid">
     <div class="unit" v-for="unit in computedUnits" :key="unit.id">
-      <BlockUnit @sizeChanged="updateSize" @positionChanged="updatePosition" @removeBlock="updateRemoved" :blockId="unit.id" :totally="computedUnits" :computedUnit="unit"/>       
+      <BlockUnit @size-changed="updateSize" @position-changed="updatePosition" @remove-block="updateRemoved" :block-id="unit.id" :totally="computedUnits" :computed-unit="unit"/>       
     </div>
     <div class="button-block">
       <div class="positionButton" v-for="unit in computedUnits" :key="unit.id">

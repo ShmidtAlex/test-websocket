@@ -2,7 +2,6 @@
   <vue-resizable @resize:end="handleResize" @drag:end="handlePosition" :top="computedTop" :left="computedLeft" v-show="windowVisible" :width="computedWidth" :height="computedHeight" :min-height="initialSize.height" :min-width="initialSize.width" resizable drag-selector=".title" >
     <div class="block" :id="blockId"
       :style="{ border: `2px solid ${this.computedBorderColor}`, backgroundColor: computedBorderColor, zIndex: blockId }">
-      <!-- @mouseup.stop="changeZIndex" -->
       <div class="title">some block # {{ blockId }}</div>
       <div class="text">top:{{computedTop}}
       </div>
