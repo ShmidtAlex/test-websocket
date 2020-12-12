@@ -23,7 +23,8 @@ export default new Vuex.Store({
         elem.top -= 10;
       } else {
         elem.top = 0;
-      }      
+      }
+      localStorage.setItem('lastSessionData', JSON.stringify(state.blocks));      
     },
     moveDown(state, value) {
       let elem = state.blocks[value];
@@ -31,7 +32,8 @@ export default new Vuex.Store({
         elem.top += 10;
       } else {
         elem.top = 515;
-      }  
+      }
+      localStorage.setItem('lastSessionData', JSON.stringify(state.blocks));  
     },
     moveLeft(state, value) {
       let elem = state.blocks[value];
@@ -39,7 +41,8 @@ export default new Vuex.Store({
         elem.left -= 10;
       } else {
         elem.left = 0;
-      }  
+      } 
+      localStorage.setItem('lastSessionData', JSON.stringify(state.blocks)); 
     },
     moveRight(state, value) {
       let elem = state.blocks[value];
@@ -47,7 +50,8 @@ export default new Vuex.Store({
         elem.left += 10;
       } else {
         elem.left = state.gridSize.width-state.blockSize.width;
-      }  
+      } 
+      localStorage.setItem('lastSessionData', JSON.stringify(state.blocks)); 
     },
     changeGridSize(state, value) {
       state.gridSize.width = Math.round(value)
