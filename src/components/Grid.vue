@@ -14,22 +14,8 @@
       <BlockUnit @sizeChanged="updateSize" @positionChanged="updatePosition" @removeBlock="updateRemoved" :blockId="unit.id" :totally="computedUnits" :computedUnit="unit"/>       
     </div>
     <div class="button-block">
-      <div class="positionButton" v-for="unit in computedUnits" :key="unit.id">
-        <div class="title">
-           block # {{unit.id}}
-        </div>
-        <div class="buttons">
-          <div class="manage-row">
-            <button @click="moveUp(unit.id)" class="direction">UP</button>
-          </div>
-           <div class="manage-row middle-row">
-            <button @click="moveLeft(unit.id)" class="direction">LEFT</button>
-            <button @click="moveRight(unit.id)" class="direction">RIGHT</button>
-          </div>
-           <div class="manage-row">
-            <button @click="moveDown(unit.id)" class="direction">DOWN</button>
-          </div>
-        </div>        
+      <div v-for="unit in sortedComputedUnits" :key="unit.id">
+        <BlockUnitButton :id="unit.id" :lastChangedElem="lastChangedElemId"/>   
       </div>
     </div>
   </div>
@@ -37,10 +23,12 @@
 
 <script>
 import BlockUnit from './BlockUnit.vue'
+import BlockUnitButton from  './BlockUnitButton.vue'
 export default {
   name: 'Grid',
   components: {
-    BlockUnit
+    BlockUnit,
+    BlockUnitButton,
   },
   props: {
     msg: String
@@ -79,26 +67,7 @@ export default {
     // 
   },
   methods: {
-    moveUp(id){
-      let index = id;
-      this.lastChangedElemId = id;
-      this.$store.commit('moveUp', index);
-    },
-    moveDown(id){
-      let index = id;
-      this.lastChangedElemId = id;
-      this.$store.commit('moveDown', index);
-    },
-    moveLeft(id){
-      let index = id;
-      this.lastChangedElemId = id;
-      this.$store.commit('moveLeft', index);
-    },
-    moveRight(id){
-      let index = id;
-      this.lastChangedElemId = id;
-      this.$store.commit('moveRight', index);
-    },
+    
     getWindowWidth() {
       this.windowWidth = document.documentElement.clientWidth;
       //we need to add commits or actions on this event, which will initiate changing of blocks position on grid.
@@ -147,6 +116,10 @@ export default {
     },
     computedGridWidth() {
       return this.gridWidth;
+    },
+    sortedComputedUnits() {
+      const sorted = this.computedUnits
+      return sorted.sort((a, b) => a.id - b.id)
     }
   },
   watch: {    
