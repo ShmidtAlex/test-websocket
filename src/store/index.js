@@ -8,9 +8,9 @@ export default new Vuex.Store({
     blocks: [
       { id: 0, top: 100, left: 120, width: 300, height: 100 },
       { id: 1, top: 10, left: 220, width: 300, height: 100 },
-      { id: 2, top: 343, left: 129, width: 300, height: 100 },
-      { id: 3, top: 400, left: 343, width: 300, height: 100 },
-      { id: 4, top: 290, left: 277, width: 300, height: 100 }
+      { id: 2, top: 340, left: 130, width: 300, height: 100 },
+      { id: 3, top: 400, left: 340, width: 300, height: 100 },
+      { id: 4, top: 290, left: 270, width: 300, height: 100 }
     ],
     gridSize: { width: null, height: null },
     blockSize: { width: 300, height: 100 },

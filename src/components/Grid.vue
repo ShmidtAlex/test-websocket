@@ -62,8 +62,8 @@ export default {
       this.getWindowHeight()
     })
     const gridElem = document.querySelector('.grid');
-    this.gridHeight = (+window.getComputedStyle(gridElem).height.match(/\d*/))*0.7/10
-    this.gridWidth = + Math.round(window.getComputedStyle(gridElem).width.match(/\d*/)*0.9/10)
+    this.gridHeight = Math.round(+window.getComputedStyle(gridElem).height.match(/\d*/)*0.77/10)
+    this.gridWidth = + Math.round(window.getComputedStyle(gridElem).width.match(/\d*/)/10)
     // 
   },
   methods: {
@@ -150,6 +150,7 @@ export default {
       flex-direction: row;
       justify-content: flex-start;
       color: black;
+      box-sizing: border-box;
       .left-scale {
         position: absolute;
         left: -8px;
@@ -175,6 +176,7 @@ export default {
       display: flex;
       flex-direction: column;
       position: relative;
+      box-sizing: border-box;
       .bottom-scale {
         position: absolute;
         bottom: -10px;

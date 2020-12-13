@@ -83,10 +83,51 @@
       },
        
       handlePosition(obj) {
-        this.localCoordsObj = Object.assign(this.localCoordsObj, obj);
+        const normalizedObj =  this.normalizeObj(obj);
+        // this.returnToTheGrid(this.normalizeObj(obj));
+        const returnedToGrid = this.returnToTheGrid(normalizedObj)
+        this.returnToTheGrid(normalizedObj)
+        this.localCoordsObj = Object.assign(this.localCoordsObj, returnedToGrid);
         delete this.localCoordsObj.eventName;
         this.changeZIndex();
         this.$emit('positionChanged', this.localCoordsObj); 
+      },
+
+      normalizeObj(obj) {
+        for (let key in obj){
+          if (key !== 'id' && obj[key]%10 !== 0 && typeof obj[key] === 'number'){
+            while(obj[key] % 10 !== 0) {
+              obj[key] = obj[key]-1;
+            }
+          }
+        }
+        return obj;
+      },
+
+      returnToTheGrid(obj){
+        const greedElem = document.querySelector('.horizontal-grid-lines');
+        console.log(window.getComputedStyle(greedElem).width)
+        const greedCoords = {
+          top: 0,
+          right: Math.round(+window.getComputedStyle(greedElem).width.match(/\d*/)),
+          left: 0,
+          bottom: Math.round(+window.getComputedStyle(greedElem).height.match(/\d*/)),
+        }
+        console.log(greedCoords, obj)
+        if(obj.left < greedCoords.left) {
+          obj.left = 0;
+        }
+        if(obj.top < greedCoords.top) {
+          obj.top = 0;
+        }
+        if((obj.left + obj.width) > greedCoords.right) {
+          obj.left = greedCoords.right - obj.width;
+        }
+        if ((obj.top + obj.height) > greedCoords.bottom) {
+          obj.top = greedCoords.bottom - obj.height
+        }
+        console.log(obj)
+        return obj;
       },
 
       changeZIndex() {
@@ -171,7 +212,7 @@
       computedHeight() {
         return this.computedUnit.height;
       },
-      
+
       computedWidth() {
         return this.computedUnit.width;
       },
