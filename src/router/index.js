@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'InteractiveDesktop',
-    component: InteractiveDesktop
+    component: InteractiveDesktop,
   },
   {
     path: '/websocket',
@@ -17,7 +17,15 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/WebsocketConnection.vue')
-  }
+  },
+  // {
+  //   path: '/handsontable',
+  //   name: 'HandsonTableDataVisualization',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/HandsonTableDataVisualization.vue')
+  // }
 ]
 
 const router = new VueRouter({
