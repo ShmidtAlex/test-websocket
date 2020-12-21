@@ -84,9 +84,7 @@
        
       handlePosition(obj) {
         const normalizedObj =  this.normalizeObj(obj);
-        // this.returnToTheGrid(this.normalizeObj(obj));
-        const returnedToGrid = this.returnToTheGrid(normalizedObj)
-        this.returnToTheGrid(normalizedObj)
+        const returnedToGrid = this.returnToTheGrid(normalizedObj);
         this.localCoordsObj = Object.assign(this.localCoordsObj, returnedToGrid);
         delete this.localCoordsObj.eventName;
         this.changeZIndex();
@@ -106,14 +104,12 @@
 
       returnToTheGrid(obj){
         const greedElem = document.querySelector('.horizontal-grid-lines');
-        console.log(window.getComputedStyle(greedElem).width)
         const greedCoords = {
           top: 0,
           right: Math.round(+window.getComputedStyle(greedElem).width.match(/\d*/)),
           left: 0,
           bottom: Math.round(+window.getComputedStyle(greedElem).height.match(/\d*/)),
         }
-        console.log(greedCoords, obj)
         if(obj.left < greedCoords.left) {
           obj.left = 0;
         }
@@ -126,7 +122,6 @@
         if ((obj.top + obj.height) > greedCoords.bottom) {
           obj.top = greedCoords.bottom - obj.height
         }
-        console.log(obj)
         return obj;
       },
 
@@ -167,8 +162,7 @@
             this.removeUnitsOfMeasure(elem.style.top) == shouldBeLowerBlockCoords[0].top 
             && this.removeUnitsOfMeasure(elem.style.left) == shouldBeLowerBlockCoords[0].left 
             && (+this.removeUnitsOfMeasure(elem.style.width) + this.removeUnitsOfMeasure(elem.style.left)) == shouldBeLowerBlockCoords[0].right
-            && (this.removeUnitsOfMeasure(elem.style.height) + this.removeUnitsOfMeasure(elem.style.top) == shouldBeLowerBlockCoords[0].bottom));
-            
+            && (this.removeUnitsOfMeasure(elem.style.height) + this.removeUnitsOfMeasure(elem.style.top) == shouldBeLowerBlockCoords[0].bottom));            
             shouldBeLowerBlock[0].style.zIndex = 4;
             this.reCountZIndexes(higherElem, shouldBeLowerBlock[0]);
         }
