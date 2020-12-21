@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Interactive Desktop</router-link> |
       <router-link to="/websocket">Websocket Connectioin</router-link> |
-      <!-- <router-link to="/handsontable">Handsontable Data Visualization</router-link> -->
+      <router-link to="/chartjs">Chart.js Data Visualization</router-link>
     </div>
     <router-view/>
   </div>
