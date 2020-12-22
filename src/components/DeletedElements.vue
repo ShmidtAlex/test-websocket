@@ -30,7 +30,7 @@
   }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
   .deleted-button-pannel, .wrapper {
     display: flex;
     flex-direction: row;
