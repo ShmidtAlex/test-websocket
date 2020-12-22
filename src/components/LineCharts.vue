@@ -6,6 +6,7 @@
     
     mounted () {
       this.renderChart(this.chartdata, this.options)
+      console.log(this.$data._chart)
     }
   }
 </script>

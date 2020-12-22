@@ -1,7 +1,7 @@
 <template>
   <div class="row-wrapper">
     <label>{{ label }}</label>
-    <input type="text" :placeholder="input" v-model="settedVal" @keyup.enter="setValue">
+    <input type="text" v-model="settedVal" @keyup.enter="setValue">
   </div>
 </template>
 <script>
@@ -22,7 +22,7 @@
     },
     data() {
       return {
-        settedVal: null
+        settedVal: this.input
       }
     },
     computed: {

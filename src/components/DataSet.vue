@@ -23,6 +23,7 @@
         
       }
     },
+   
     methods: {
       replaceValue(obj){
         this.$emit('changeMonthValue', obj)
